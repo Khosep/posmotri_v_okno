@@ -95,7 +95,6 @@ ol {
   margin: 0 30px;
   gap: 30px;
   inline-size: 1140px;
-  block-size: 534px;
 }
 
 /*----------RESULT----------*/
@@ -161,7 +160,7 @@ ol {
   appearance: none;
   inline-size: 225px;
   text-align: start;
-  font-family: "Fira Sans Condensed", sans-serif;
+  font-family: inherit;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.2;
@@ -171,6 +170,7 @@ ol {
   border-style: solid;
   border-color: rgba(255, 255, 255, 1);
   padding-left: 0;
+  min-block-size: 25px;
 }
 
 .search-form__textfield:active {
@@ -219,10 +219,6 @@ ol {
   flex-direction: column;
   max-height: 298px;
   overflow: hidden auto;
-}
-
-.content__list:not(:last-child) {
-  gap: 30px;
 }
 
 .title {
@@ -289,10 +285,11 @@ ol {
   line-height: 1;
   color: #fff;
   text-transform: uppercase;
-  /*троеточие при переполнение контента (блок из 3-х строк)*/
+  /*троеточие при переполнение контента (блок из 4-х строк)*/
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-inline-size: 200px;
 }
 
 .content__video-card-description {
