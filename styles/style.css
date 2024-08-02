@@ -4,18 +4,70 @@
   box-sizing: border-box;
 }
 
-html {
-  block-size: 100%;
+/* Скрываем контент (.search-form__label-text (Город), .search-form__checkbox (Утро, День, Ночь))*/
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px; /*логический аналог 'width'/'height'*/
+  block-size: 1px; /*логический аналог 'height'/'width'*/
+  overflow: hidden; /*Если содержимое блока будет больше, чем границы блока, оно будет обрезано*/
+  /* clip: rect(0 0 0 0); */ /*устарело*/
+  clip-path: inset(
+    50%
+  ); /* задаем видимую область элемента. Всё, что выходит за её пределы, скрывается;*/
+  white-space: nowrap; /*браузер перестаёт учитывать границы элемента и выводит весь текст в одну строку*/
 }
 
+/*----------BUTTONS----------*/
+.button {
+  inline-size: 100%;
+  padding: 6px 0;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  border: 1px solid currentColor;
+}
+
+.button:hover {
+  text-decoration: underline 1px currentColor;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline-offset: 1px;
+  outline: 1px solid #fff;
+}
+
+.button:active {
+  background-color: #545050;
+}
+
+/*--------------------------------------------------------------*/
+html {
+  block-size: 100%;
+  /* writing-mode: horizontal-tb; - По дефолту */
+}
+
+/*вся страница*/
 .page {
+  /*для 'writing-mode: horizontal-tb;' inline-size - это 'width', block-size - 'height'*/
   inline-size: 1200px;
   block-size: 100%;
   margin: auto;
   color: #fff;
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: "Fira Sans Condensed", sans-serif;
   font-size: 18px;
   background-color: #1b1919;
+  /*Центрируем блок .content - весь контент (единственный элемент) - на странице*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1,
@@ -35,4 +87,240 @@ fieldset {
 ul,
 ol {
   list-style: none;
+}
+
+.content {
+  display: flex;
+  align-items: end;
+  margin: 0 30px;
+  gap: 30px;
+  inline-size: 1140px;
+  block-size: 534px;
+}
+
+/*----------RESULT----------*/
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.result__video-container {
+  position: relative;
+  width: 711px;
+  height: 386px;
+}
+
+.result__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/*----------SEARCH__FORM----------*/
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.search-form__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+}
+
+.search-form__fieldset-title {
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: 1.2;
+}
+
+.search-form__label {
+  display: flex;
+  color: #fff;
+  line-height: 1.2;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.search-form__label:has(:hover) {
+  text-decoration: underline;
+}
+
+.search-form__label:has(:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+
+.search-form__textfield {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  inline-size: 225px;
+  text-align: start;
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  background: none;
+  color: rgba(255, 255, 255, 0.7);
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 1);
+  padding-left: 0;
+}
+
+.search-form__textfield:active {
+  outline: 1px solid #fff;
+}
+
+.search-form__checkbox-list {
+  display: flex;
+  gap: 15px;
+}
+
+.search-form__pseudo-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 19px;
+  block-size: 19px;
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::before {
+  content: "";
+  inline-size: 15px;
+  block-size: 15px;
+  background-color: #fff;
+}
+
+.search-form__submit-button {
+  align-self: flex-end;
+  inline-size: 194px;
+}
+
+/*----------CONTENT__DETAILS----------*/
+.content__details {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 2px;
+  justify-content: start;
+  block-size: inherit;
+}
+
+.content__list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 298px;
+  overflow: hidden auto;
+}
+
+.content__list:not(:last-child) {
+  gap: 30px;
+}
+
+.title {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 75px;
+  text-transform: uppercase;
+  line-height: 0.94;
+}
+
+.content__accent {
+  color: #545050;
+}
+
+/*----------TEMPLATE preloader-template----------*/
+.preloader {
+  position: absolute;
+  background-color: #545050;
+}
+
+/*----------TEMPLATE cards-list-item-template----------*/
+.content__list-item:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.content__card-link {
+  display: block;
+  text-decoration: none;
+  margin: 1px;
+}
+
+.content__card-link:hover {
+  text-decoration: underline 2px #fff;
+}
+
+.content__card-link:focus {
+  overflow: none;
+}
+
+.content__card-link:focus-visible {
+  outline: 1px solid #fff;
+}
+
+.content__card-link_current {
+  background-color: #545050;
+}
+
+.content__video-card {
+  display: flex;
+}
+
+.content__video-card-description-container {
+  padding: 2px 0 4px 2px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.content__video-card-title {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  /*троеточие при переполнение контента (блок из 3-х строк)*/
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.content__video-card-description {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 0.9;
+  color: #fff;
+  /* margin-top: 6px; */
+  /*троеточие при переполнение контента*/
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.content__video-card-thumbnail {
+  display: block;
+  padding: 2px 2px 2px 0;
+  min-inline-size: 194px;
+  max-block-size: 107px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/*----------TEMPLATE more-button-template----------*/
+
+.more-button {
+  margin: 1px 2px 2px;
 }
