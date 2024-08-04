@@ -235,15 +235,9 @@ ol {
   color: #545050;
 }
 
-/*----------TEMPLATE preloader-template----------*/
-.preloader {
-  position: absolute;
-  background-color: #545050;
-}
-
 /*----------TEMPLATE cards-list-item-template----------*/
 .content__list-item:not(:last-child) {
-  margin-bottom: 30px;
+  margin-bottom: 26px;
 }
 
 .content__card-link {
